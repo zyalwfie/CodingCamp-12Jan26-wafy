@@ -56,20 +56,32 @@ function startCounting() {
 // End counting animation
 
 // Video modal
-const showVideoModalBtn = document.querySelector('#open-video-modal');
-const closeVideoModalBtn = document.querySelector('.iframe__close');
+const openBtn = document.querySelector('#open-video-modal');
+const closeBtn = document.querySelector('.iframe__close');
 const videoModal = document.querySelector('.iframe');
+const iframe = videoModal.querySelector('.iframe__video');
 
-function showVideoModal() {
+function openModal() {
+	const videoSrc = iframe.dataset.src;
+
+	iframe.src = videoSrc;
 	videoModal.classList.add('show');
 }
 
-function toggleVideoModal() {
-	videoModal.classList.toggle('show');
+function closeVideoModal() {
+	videoModal.classList.remove('show');
+
+	iframe.src = '';
 }
 
-showVideoModalBtn.addEventListener('click', showVideoModal);
-closeVideoModalBtn.addEventListener('click', toggleVideoModal);
+openBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeVideoModal);
+
+videoModal.addEventListener('click', (e) => {
+	if (e.target === videoModal) {
+		closeVideoModal();
+	}
+});
 // End video modal
 
 // Modal
@@ -320,4 +332,5 @@ popupSubmit.addEventListener('click', () => {
 closeToast.addEventListener('click', closeToastHandler);
 
 // End contact
+
 
