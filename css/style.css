@@ -767,12 +767,70 @@ textarea {
     font-weight: 500;
 }
 
-.modal {
+.iframe {
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, .5);
     backdrop-filter: blur(.75rem);
     display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease-in-out;
+}
+
+.iframe.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.iframe__dialog {
+    border-radius: .25rem;
+    width: calc(85vw - 1rem);
+    height: 300px;
+    position: relative;
+    padding: .5rem;
+    background-color: white;
+    box-shadow: 0 0 .75rem rgba(255, 255, 255, .5);
+}
+
+.iframe__video {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 .25rem var(--neutral);
+    border-radius: .5rem;
+}
+
+.iframe__close {
+    background-color: white;
+    position: absolute;
+    border: transparent;
+    border-radius: 9999rem;
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -1.25rem;
+    right: -1.25rem;
+    transition: 100ms linear;
+    cursor: pointer;
+}
+
+.iframe__close:hover {
+    background-color: var(--neutral);
+    color: white;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(.75rem);
+    /* display: flex; */
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 999;
@@ -1179,6 +1237,12 @@ textarea {
     .footer__bottom {
         flex-direction: row;
         justify-content: space-between;
+    }
+}
+
+@media (min-width: 1024px) {
+    .iframe__dialog {
+        height: 600px;
     }
 }
 

@@ -55,6 +55,23 @@ function startCounting() {
 }
 // End counting animation
 
+// Video modal
+const showVideoModalBtn = document.querySelector('#open-video-modal');
+const closeVideoModalBtn = document.querySelector('.iframe__close');
+const videoModal = document.querySelector('.iframe');
+
+function showVideoModal() {
+	videoModal.classList.add('show');
+}
+
+function toggleVideoModal() {
+	videoModal.classList.toggle('show');
+}
+
+showVideoModalBtn.addEventListener('click', showVideoModal);
+closeVideoModalBtn.addEventListener('click', toggleVideoModal);
+// End video modal
+
 // Modal
 const modal = document.querySelector('.modal');
 const greeting = document.querySelector('.hero__greeting');
@@ -158,11 +175,9 @@ const isEmpty = (value) => value.trim() === '';
 const isLengthValid = (value, min, max) =>
 	value.length >= min && value.length <= max;
 
-const isValidEmail = (value) =>
-	/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
-const isValidPhoneID = (value) =>
-	/^08\d{7,11}$/.test(value);
+const isValidPhoneID = (value) => /^08\d{7,11}$/.test(value);
 
 function showError(input, icon, feedback, message) {
 	input.classList.add('error');
@@ -190,10 +205,7 @@ function resetContactForm() {
 function validateForm() {
 	let isValid = true;
 
-	if (
-		isEmpty(firstName.value) ||
-		!isLengthValid(firstName.value, 2, 30)
-	) {
+	if (isEmpty(firstName.value) || !isLengthValid(firstName.value, 2, 30)) {
 		showError(
 			firstName,
 			errorFirstNameIcon,
@@ -205,10 +217,7 @@ function validateForm() {
 		clearError(firstName, errorFirstNameIcon, errorFirstName);
 	}
 
-	if (
-		!isEmpty(lastName.value) &&
-		!isLengthValid(lastName.value, 2, 30)
-	) {
+	if (!isEmpty(lastName.value) && !isLengthValid(lastName.value, 2, 30)) {
 		showError(
 			lastName,
 			errorLastNameIcon,
@@ -241,17 +250,10 @@ function validateForm() {
 		);
 		isValid = false;
 	} else {
-		clearError(
-			phoneNumber,
-			errorPhoneNumberIcon,
-			errorPhoneNumber
-		);
+		clearError(phoneNumber, errorPhoneNumberIcon, errorPhoneNumber);
 	}
 
-	if (
-		isEmpty(message.value) ||
-		!isLengthValid(message.value, 10, 300)
-	) {
+	if (isEmpty(message.value) || !isLengthValid(message.value, 10, 300)) {
 		showError(
 			message,
 			errorMessageIcon,
@@ -318,3 +320,4 @@ popupSubmit.addEventListener('click', () => {
 closeToast.addEventListener('click', closeToastHandler);
 
 // End contact
+
