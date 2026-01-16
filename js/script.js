@@ -55,6 +55,35 @@ function startCounting() {
 }
 // End counting animation
 
+// Video modal
+const openBtn = document.querySelector('#open-video-modal');
+const closeBtn = document.querySelector('.iframe__close');
+const videoModal = document.querySelector('.iframe');
+const iframe = videoModal.querySelector('.iframe__video');
+
+function openModal() {
+	const videoSrc = iframe.dataset.src;
+
+	iframe.src = videoSrc;
+	videoModal.classList.add('show');
+}
+
+function closeVideoModal() {
+	videoModal.classList.remove('show');
+
+	iframe.src = '';
+}
+
+openBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeVideoModal);
+
+videoModal.addEventListener('click', (e) => {
+	if (e.target === videoModal) {
+		closeVideoModal();
+	}
+});
+// End video modal
+
 // Modal
 const modal = document.querySelector('.modal');
 const greeting = document.querySelector('.hero__greeting');
@@ -158,11 +187,9 @@ const isEmpty = (value) => value.trim() === '';
 const isLengthValid = (value, min, max) =>
 	value.length >= min && value.length <= max;
 
-const isValidEmail = (value) =>
-	/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
-const isValidPhoneID = (value) =>
-	/^08\d{7,11}$/.test(value);
+const isValidPhoneID = (value) => /^08\d{7,11}$/.test(value);
 
 function showError(input, icon, feedback, message) {
 	input.classList.add('error');
@@ -190,10 +217,7 @@ function resetContactForm() {
 function validateForm() {
 	let isValid = true;
 
-	if (
-		isEmpty(firstName.value) ||
-		!isLengthValid(firstName.value, 2, 30)
-	) {
+	if (isEmpty(firstName.value) || !isLengthValid(firstName.value, 2, 30)) {
 		showError(
 			firstName,
 			errorFirstNameIcon,
@@ -205,10 +229,7 @@ function validateForm() {
 		clearError(firstName, errorFirstNameIcon, errorFirstName);
 	}
 
-	if (
-		!isEmpty(lastName.value) &&
-		!isLengthValid(lastName.value, 2, 30)
-	) {
+	if (!isEmpty(lastName.value) && !isLengthValid(lastName.value, 2, 30)) {
 		showError(
 			lastName,
 			errorLastNameIcon,
@@ -241,17 +262,10 @@ function validateForm() {
 		);
 		isValid = false;
 	} else {
-		clearError(
-			phoneNumber,
-			errorPhoneNumberIcon,
-			errorPhoneNumber
-		);
+		clearError(phoneNumber, errorPhoneNumberIcon, errorPhoneNumber);
 	}
 
-	if (
-		isEmpty(message.value) ||
-		!isLengthValid(message.value, 10, 300)
-	) {
+	if (isEmpty(message.value) || !isLengthValid(message.value, 10, 300)) {
 		showError(
 			message,
 			errorMessageIcon,
@@ -318,3 +332,5 @@ popupSubmit.addEventListener('click', () => {
 closeToast.addEventListener('click', closeToastHandler);
 
 // End contact
+
+
