@@ -577,6 +577,196 @@ main {
     color: white;
 }
 
+.contact {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.contact__content {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.contact__header {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.contact__title {
+    font-size: calc(1.5rem + 1vw);
+    font-weight: 600;
+    text-align: center;
+}
+
+.contact__desc {
+    text-align: center;
+}
+
+.contact__form {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 1rem;
+    box-shadow: 0 0 1px var(--neutral);
+    border-radius: .25rem;
+    padding-block: 1.5rem;
+    padding-inline: 1rem;
+}
+
+.contact__form-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.contact__input {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.contact__input-item {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+}
+
+.first-name,
+.last-name,
+.email,
+.phone-number,
+.message {
+    border: 1px solid var(--neutral);
+    border-radius: .5rem;
+    padding: .75rem;
+    transition: 100ms linear;
+    outline-color: transparent;
+    outline-width: 2px;
+}
+
+.first-name.error,
+.last-name.error,
+.email.error,
+.phone-number.error,
+.message.error {
+    border-color: var(--secondary);
+}
+
+.first-name:focus-visible,
+.last-name:focus-visible,
+.email:focus-visible,
+.phone-number:focus-visible,
+.message:focus-visible {
+    outline-color: var(--primary);
+}
+
+.contact__invalid-feedback,
+.contact__invalid-icon {
+    color: var(--secondary);
+    font-size: .75rem;
+}
+
+.contact__invalid-feedback {
+    display: none;
+}
+
+.contact__invalid-feedback.show {
+    display: block;
+}
+
+.contact__invalid-icon {
+    position: absolute;
+    right: .75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: 100ms linear;
+}
+
+.contact__invalid-icon.show {
+    opacity: 1;
+}
+
+.contact__invalid-icon:has(+ textarea) {
+    right: .75rem;
+    bottom: .75rem;
+    top: initial;
+    transform: initial;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.contact__submit {
+    border: none;
+    border-radius: .5rem;
+    background-color: var(--primary);
+    color: var(--neutral);
+    font-weight: 600;
+    padding-block: .75rem;
+    transition: 200ms ease-in-out;
+    cursor: pointer;
+}
+
+.contact__submit:hover {
+    background-color: var(--neutral);
+    color: white;
+}
+
+.contact__form span {
+    font-size: .75rem;
+    text-align: center;
+    color: gray;
+}
+
+.contact__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact__info-item {
+    display: flex;
+    padding-block: 2rem;
+    gap: 1.25rem;
+}
+
+.contact__info-item:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+
+.contact__info-item:first-child {
+    padding-block-start: initial;
+}
+
+.contact__info-details {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.contact__info-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.contact__info-desc {
+    color: gray;
+    font-size: 14px;
+}
+
+.contact__info-link {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    font-weight: 500;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -810,6 +1000,14 @@ main {
 
     .card {
         justify-content: space-between;
+    }
+
+    .contact__content {
+        flex-direction: row;
+    }
+
+    .contact__form, .contact__info {
+        width: 50%;
     }
 
     .footer__top {
