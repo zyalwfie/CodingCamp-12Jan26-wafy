@@ -114,7 +114,11 @@ const messageEmail = document.querySelector('.message__email');
 const messagePhone = document.querySelector('.message__phone');
 const inquiry = document.querySelector('.message__inquiry');
 const closePopup = document.querySelector('.popup__close');
-const popupSubmit = document.querySelector('.pop__submit');
+const popupSubmit = document.querySelector('.popup__submit');
+
+// * Toast
+const toast = document.querySelector('.toast');
+const closeToast = document.querySelector('.toast__close');
 
 // * Error feedback icon
 const errorFirstNameIcon = document.querySelector(
@@ -150,5 +154,167 @@ const errorMessage = document.querySelector(
 	'.contact__invalid-feedback.invalid-message'
 );
 
-console.log(errorFirstNameIcon, errorMessageIcon);
+const isEmpty = (value) => value.trim() === '';
+const isLengthValid = (value, min, max) =>
+	value.length >= min && value.length <= max;
+
+const isValidEmail = (value) =>
+	/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+const isValidPhoneID = (value) =>
+	/^08\d{7,11}$/.test(value);
+
+function showError(input, icon, feedback, message) {
+	input.classList.add('error');
+	icon.classList.add('show');
+	feedback.textContent = message;
+	feedback.classList.add('show');
+}
+
+function clearError(input, icon, feedback) {
+	input.classList.remove('error');
+	icon.classList.remove('show');
+	feedback.classList.remove('show');
+}
+
+function resetContactForm() {
+	contactForm.reset();
+
+	clearError(firstName, errorFirstNameIcon, errorFirstName);
+	clearError(lastName, errorLastNameIcon, errorLastName);
+	clearError(email, errorEmailIcon, errorEmail);
+	clearError(phoneNumber, errorPhoneNumberIcon, errorPhoneNumber);
+	clearError(message, errorMessageIcon, errorMessage);
+}
+
+function validateForm() {
+	let isValid = true;
+
+	if (
+		isEmpty(firstName.value) ||
+		!isLengthValid(firstName.value, 2, 30)
+	) {
+		showError(
+			firstName,
+			errorFirstNameIcon,
+			errorFirstName,
+			'First name must be 2–30 characters.'
+		);
+		isValid = false;
+	} else {
+		clearError(firstName, errorFirstNameIcon, errorFirstName);
+	}
+
+	if (
+		!isEmpty(lastName.value) &&
+		!isLengthValid(lastName.value, 2, 30)
+	) {
+		showError(
+			lastName,
+			errorLastNameIcon,
+			errorLastName,
+			'Last name must be 2–30 characters.'
+		);
+		isValid = false;
+	} else {
+		clearError(lastName, errorLastNameIcon, errorLastName);
+	}
+
+	if (isEmpty(email.value) || !isValidEmail(email.value)) {
+		showError(
+			email,
+			errorEmailIcon,
+			errorEmail,
+			'Please enter a valid email address.'
+		);
+		isValid = false;
+	} else {
+		clearError(email, errorEmailIcon, errorEmail);
+	}
+
+	if (isEmpty(phoneNumber.value) || !isValidPhoneID(phoneNumber.value)) {
+		showError(
+			phoneNumber,
+			errorPhoneNumberIcon,
+			errorPhoneNumber,
+			'Phone number must start with 08 and contain 9–13 digits.'
+		);
+		isValid = false;
+	} else {
+		clearError(
+			phoneNumber,
+			errorPhoneNumberIcon,
+			errorPhoneNumber
+		);
+	}
+
+	if (
+		isEmpty(message.value) ||
+		!isLengthValid(message.value, 10, 300)
+	) {
+		showError(
+			message,
+			errorMessageIcon,
+			errorMessage,
+			'Message must be 10–300 characters.'
+		);
+		isValid = false;
+	} else {
+		clearError(message, errorMessageIcon, errorMessage);
+	}
+
+	return isValid;
+}
+
+// ============================
+// Popup handlers
+// ============================
+function openPopup() {
+	document.querySelector('.popup').classList.add('show');
+
+	messageName.value = `${firstName.value} ${lastName.value}`.trim();
+	messageEmail.value = email.value;
+	messagePhone.value = phoneNumber.value;
+	inquiry.value = message.value;
+}
+
+function closePopupModal() {
+	document.querySelector('.popup').classList.remove('show');
+}
+
+let toastTimeout;
+
+function showToast() {
+	toast.classList.add('show');
+
+	toastTimeout = setTimeout(() => {
+		closeToastHandler();
+	}, 3000);
+}
+
+function closeToastHandler() {
+	toast.classList.remove('show');
+	clearTimeout(toastTimeout);
+}
+
+contactForm.addEventListener('submit', (e) => {
+	e.preventDefault();
+
+	if (validateForm()) {
+		openPopup();
+	}
+});
+
+closePopup.addEventListener('click', () => {
+	closePopupModal();
+});
+
+popupSubmit.addEventListener('click', () => {
+	closePopupModal();
+	showToast();
+	resetContactForm();
+});
+
+closeToast.addEventListener('click', closeToastHandler);
+
 // End contact

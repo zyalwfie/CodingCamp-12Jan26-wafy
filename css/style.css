@@ -969,6 +969,63 @@ textarea {
     color: white;
 }
 
+.toast {
+    position: fixed;
+    top: 7.5rem;
+    inset-inline: var(--layout-inline-padding);
+    display: flex;
+    justify-content: end;
+    z-index: 99;
+    pointer-events: none;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+}
+
+.toast.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.toast__dialog {
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0 0 2px var(--neutral);
+    border-radius: .25rem;
+    position: relative;
+}
+
+.toast__content {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+}
+
+.toast__icon {
+    color: green;
+}
+
+.toast__close {
+    position: absolute;
+    top: -.75rem;
+    right: -.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid var(--neutral);
+    border-radius: 9999rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    transition: 100ms ease-in-out;
+    cursor: pointer;
+}
+
+.toast__close:hover {
+    background-color: var(--neutral);
+    color: white;
+}
+
 .footer__container {
     background-color: var(--neutral);
     color: white;
