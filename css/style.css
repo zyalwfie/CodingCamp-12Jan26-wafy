@@ -768,12 +768,11 @@ textarea {
 }
 
 .modal {
-    display: none;
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, .5);
     backdrop-filter: blur(.75rem);
-    /* display: flex; */
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 999;
