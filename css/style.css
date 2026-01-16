@@ -869,6 +869,106 @@ textarea {
     transition: 200ms linear;
 }
 
+.popup {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(.75rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease-in-out;
+}
+
+.popup.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.popup__dialog {
+    width: min(500px, calc(100vw - 2rem));
+    background-color: white;
+    border-radius: .25rem;
+    transform: translateY(-10px);
+    transition: transform 200ms ease-in-out;
+}
+
+.popup__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.popup__header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--neutral);
+}
+
+.popup__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.popup__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-inline: 1.5rem;
+}
+
+.popup__body>* {
+    padding: .75rem 1rem;
+    border: 1px solid var(--neutral);
+    border-radius: .25rem;
+    outline-color: transparent;
+}
+
+.popup__body>*:focus-visible {
+    outline-color: var(--primary);
+}
+
+.popup__footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--neutral);
+    display: flex;
+    justify-content: end;
+    gap: .5rem;
+}
+
+.popup__close {
+    border: 1px solid var(--neutral);
+    border-radius: .25rem;
+    padding: .5rem 1rem;
+    color: var(--neutral);
+    background-color: transparent;
+    transition: 100ms linear;
+    cursor: pointer;
+}
+
+.popup__close:hover {
+    background-color: var(--neutral);
+    color: white;
+}
+
+.popup__submit {
+    border: 1px solid var(--primary);
+    border-radius: .25rem;
+    padding: .5rem 1rem;
+    color: var(--neutral);
+    background-color: var(--primary);
+    transition: 100ms linear;
+    cursor: pointer;
+}
+
+.popup__submit:hover {
+    border-color: var(--neutral);
+    background-color: var(--neutral);
+    color: white;
+}
+
 .footer__container {
     background-color: var(--neutral);
     color: white;
@@ -1006,7 +1106,8 @@ textarea {
         flex-direction: row;
     }
 
-    .contact__form, .contact__info {
+    .contact__form,
+    .contact__info {
         width: 50%;
     }
 

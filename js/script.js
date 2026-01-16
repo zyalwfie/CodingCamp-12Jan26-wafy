@@ -97,3 +97,58 @@ form.addEventListener('submit', (e) => {
 	greeting.classList.add('show');
 	startCounting();
 });
+// End modal
+
+// Contact
+// * Input element
+const contactForm = document.querySelector('.contact__form');
+const firstName = document.querySelector('.first-name');
+const lastName = document.querySelector('.last-name');
+const email = document.querySelector('.email');
+const phoneNumber = document.querySelector('.phone-number');
+const message = document.querySelector('.message');
+
+// * Popup element
+const messageName = document.querySelector('.message__name');
+const messageEmail = document.querySelector('.message__email');
+const messagePhone = document.querySelector('.message__phone');
+const inquiry = document.querySelector('.message__inquiry');
+const closePopup = document.querySelector('.popup__close');
+const popupSubmit = document.querySelector('.pop__submit');
+
+// * Error feedback icon
+const errorFirstNameIcon = document.querySelector(
+	'.contact__invalid-icon.invalid-icon-first-name'
+);
+const errorLastNameIcon = document.querySelector(
+	'.contact__invalid-icon.invalid-icon-last-name'
+);
+const errorEmailIcon = document.querySelector(
+	'.contact__invalid-icon.invalid-icon-email'
+);
+const errorPhoneNumberIcon = document.querySelector(
+	'.contact__invalid-icon.invalid-icon-phone-number'
+);
+const errorMessageIcon = document.querySelector(
+	'.contact__invalid-icon.invalid-icon-message'
+);
+
+// * Error feedback
+const errorFirstName = document.querySelector(
+	'.contact__invalid-feedback.invalid-first-name'
+);
+const errorLastName = document.querySelector(
+	'.contact__invalid-feedback.invalid-last-name'
+);
+const errorEmail = document.querySelector(
+	'.contact__invalid-feedback.invalid-email'
+);
+const errorPhoneNumber = document.querySelector(
+	'.contact__invalid-feedback.invalid-phone-number'
+);
+const errorMessage = document.querySelector(
+	'.contact__invalid-feedback.invalid-message'
+);
+
+console.log(errorFirstNameIcon, errorMessageIcon);
+// End contact
